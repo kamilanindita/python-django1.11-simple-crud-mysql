@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ page_title }}
+{% endblock title %}
+
+{% block contents %}
+    <h1>{{ page_title }}</h1>
+    <a class="btn btn-primary" href="{% url 'buku:add' %}">Tambah</a>
+    <br><br>
+    <table>
+        <tr>
+            <td>#</td>
+            <td>Penulis</td>
+            <td>Judul</td>
+            <td>Kota</td>
+            <td>Penerbit</td>
+            <td>Tahun</td>
+        </tr>
+        {% for buku in semua_buku %}
+	    	<tr>
+              <td scope="row">{{forloop.counter}}</td>
+              <td>{{buku.penulis}}</td>
+		      <td>{{buku.judul}}</td>
+		      <td>{{buku.kota}}</td>
+              <td>{{buku.penerbit}}</td>
+              <td>{{buku.tahun}}</td>
+              <td><a  href="{% url 'buku:update' buku.id %}" title="">Edit</a>
+		      <td><a  href="{% url 'buku:delete' buku.id %}">Delete</a>
+		    </tr>
+	    {% endfor %}
+    </table>
+{% endblock contents %}
